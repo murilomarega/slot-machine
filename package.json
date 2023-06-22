@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "commonjs",
+  "resolutions": {
+    "styled-components": "^5"
+  },
   "scripts": {
     "dev": "vite",
     "server": "node server.js",
@@ -20,6 +23,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "redux": "^4.2.1",
+    "styled-components": "^6.0.0-rc.3",
     "yarn": "^1.22.19"
   },
   "devDependencies": {

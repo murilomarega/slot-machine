@@ -1,0 +1,72 @@
+{
+  "breakpoint": {
+    "xs": {
+      "minWidth": "0px",
+      "maxWidth": "575px"
+    },
+    "sm": {
+      "minWidth": "576px",
+      "maxWidth": "767px"
+    },
+    "md": {
+      "minWidth": "768px",
+      "maxWidth": "992px"
+    },
+    "lg": {
+      "minWidth": "993px",
+      "maxWidth": "1199px"
+    },
+    "xlg": {
+      "minWidth": "1200px"
+    }
+  },
+  "color": {
+    "gold": "#FFD700",
+    "red": "#FF0000",
+    "green": "#00FF00",
+    "black": "#000000",
+    "white": "#ffffff",
+    "pink": "#ff00de"
+  },
+  "font": {
+    "family": {
+      "monoton": "'Monoton', sans-serif",
+      "poppings": "'Poppins', sans-serif"
+    },
+    "size": {
+      "base": "16px",
+      "s1": "0.625rem",
+      "s2": "0.75rem",
+      "s3": "0.875rem",
+      "s4": "1rem",
+      "s5": "1.125rem",
+      "s6": "1.25rem",
+      "s7": "1.5rem",
+      "s8": "2rem",
+      "s9": "2.5rem",
+      "s10": "3rem"
+    },
+    "weight": {
+      "regular": "400",
+      "medium": "500",
+      "semiBold": "600",
+      "bold": "700"
+    }
+  },
+  "text": {
+    "shadow": "0 0 0.5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ff00de, 0 0 40px #ff00de, 0 0 50px #ff00de, 0 0 60px #ff00de"
+  },
+  "spacing": {
+    "s0": "0px",
+    "s1": "4px",
+    "s2": "8px",
+    "s3": "12px",
+    "s4": "16px",
+    "s5": "20px",
+    "s6": "24px",
+    "s7": "28px",
+    "s8": "32px",
+    "s9": "36px",
+    "s10": "40px"
+  }
+}
