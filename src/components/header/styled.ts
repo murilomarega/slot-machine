@@ -17,7 +17,7 @@ const Title = styled.span`
     color: ${theme.color.gold};
     font-family: ${theme.font.family.monoton};
     font-size: ${theme.font.size.s7};
-    text-shadow: ${theme.text.shadow};
+    text-shadow: ${theme.shadow.textTitle};
   `}
 `;
 

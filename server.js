@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const data = require('./game-data.json');
+const reelsData = require('./reels-data.json');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -10,7 +12,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api/games', (req, res) => {
-  res.sendFile(__dirname + '/game-data.json');
+  const { gameName } = req.query;
+
+  const gamesList = data.filter((game) => game.title.includes(gameName));
+
+  res.send({ data: gamesList });
+});
+
+app.get('/api/reels', (req, res) => {
+  res.send({ data: reelsData });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
