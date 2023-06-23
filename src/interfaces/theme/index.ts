@@ -12,6 +12,8 @@ type TColors = {
   black: string;
   white: string;
   pink: string;
+  gray: string;
+  darkGray: string;
 };
 
 type TFontFamily = {
@@ -40,8 +42,9 @@ type TFontWeight = {
   bold: string;
 };
 
-type TText = {
-  shadow: string;
+type TShadow = {
+  input: string;
+  textTitle: string;
 };
 
 type TSpacing = {
@@ -73,7 +76,7 @@ declare module 'styled-components' {
       size: TFontSize;
       weight: TFontWeight;
     };
-    text: TText;
+    shadow: TShadow;
     spacing: TSpacing;
   }
 }
