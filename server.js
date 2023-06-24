@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const data = require('./game-data.json');
+const gamesList = require('./game-data.json');
 const reelsData = require('./reels-data.json');
 
 const app = express();
@@ -12,10 +12,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api/games', (req, res) => {
-  const { gameName } = req.query;
-
-  const gamesList = data.filter((game) => game.title.includes(gameName));
-
   res.send({ data: gamesList });
 });
 

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { getReels } from '../../services/slotMachine';
-import { IReel } from '../../services/slotMachine/interfaces';
 import * as Styled from './styled';
 
 import appleImg from '../../assets/fruits/apple.png';
 import bananaImg from '../../assets/fruits/banana.png';
 import cherryImg from '../../assets/fruits/cherry.png';
 import lemonImg from '../../assets/fruits/lemon.png';
+import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
+import { fetchReels, getReels } from '../../store/slices/slotMachine';
 import { IFruitImages } from './interfaces';
 
 const fruitImages: IFruitImages = {
@@ -17,7 +17,11 @@ const fruitImages: IFruitImages = {
 };
 
 const SlotMachineGame = () => {
-  const [reels, setReels] = useState<IReel[]>([]);
+  const dispatch = useAppDispatch();
+
+  const reels = useAppSelector(getReels);
+  const slotMachineStatus = useAppSelector((state) => state.slotMachine.status);
+
   const [reelsAngles, setReelsAngles] = useState<number[]>([]);
   const [sortedItems, setSortedItems] = useState<number[]>([]);
 
@@ -50,11 +54,6 @@ const SlotMachineGame = () => {
     setSortedItems(newSortedItems);
   };
 
-  const loadReels = async () => {
-    const res = await getReels();
-    setReels(res);
-  };
-
   useEffect(() => {
     sortItems();
   }, [reelsAngles]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -64,8 +63,10 @@ const SlotMachineGame = () => {
   }, [reels]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    loadReels();
-  }, []);
+    if (slotMachineStatus === 'idle') {
+      dispatch(fetchReels());
+    }
+  }, [slotMachineStatus, dispatch]);
 
   return (
     <>

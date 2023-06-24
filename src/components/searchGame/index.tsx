@@ -1,22 +1,15 @@
-import React, { FC, useEffect } from 'react';
-import { ISearchGame } from './interfaces';
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch } from '../../hooks/useStore';
+import { setSearchedTerm } from '../../store/slices/games';
 import * as Styled from './styled';
-import { searchGamebyName } from '../../services/games';
 
-const SearchGame: FC<ISearchGame> = ({ searchGameValue, setGamesList, setSearchGameValue }) => {
-  const getSearchGame = async () => {
-    const res = await searchGamebyName(searchGameValue);
-    setGamesList(res);
-  };
+const SearchGame = () => {
+  const [searchGameValue, setSearchGameValue] = useState<string>('');
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (searchGameValue.length) {
-      getSearchGame();
-      return;
-    }
-
-    setGamesList([]);
-  }, [searchGameValue]); // eslint-disable-line react-hooks/exhaustive-deps
+    dispatch(setSearchedTerm(searchGameValue));
+  }, [searchGameValue, dispatch]);
 
   return (
     <Styled.Wrapper>
