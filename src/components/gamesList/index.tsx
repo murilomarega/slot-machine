@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { IGame } from '../../interfaces/games';
+import { IGame } from '../../services/games/intrefaces';
 import * as Styled from './styled';
 
 const GamesList: FC<{ games: IGame[] }> = ({ games }) => {

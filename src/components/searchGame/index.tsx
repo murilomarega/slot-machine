@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
-import { ISearchGame } from '../../interfaces/components/searchGame.interface';
-import { searchGamebyName } from '../../service/games';
+import { ISearchGame } from './interfaces';
 import * as Styled from './styled';
+import { searchGamebyName } from '../../services/games';
 
 const SearchGame: FC<ISearchGame> = ({ searchGameValue, setGamesList, setSearchGameValue }) => {
   const getSearchGame = async () => {

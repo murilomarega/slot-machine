@@ -1,4 +1,4 @@
-import { IGame } from '../games';
+import { IGame } from '../../services/games/intrefaces';
 
 interface ISearchGame {
   searchGameValue: string;
