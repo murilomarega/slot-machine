@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IGame } from '../../interfaces/games';
+import { IGame } from '../../services/games/intrefaces';
 import GamesList from '../gamesList';
 import SearchGame from '../searchGame';
 import * as Styled from './styled';

@@ -1,4 +1,4 @@
-import { IGame } from '../../interfaces/games';
+import { IGame } from './intrefaces';
 import apiService from '../config';
 
 const searchGamebyName = (searchValue: string) => {

@@ -1,5 +1,6 @@
 import Header from '../../components/header';
 import Sidebar from '../../components/sidebar';
+import SlotMachineGame from '../../components/slotMachine';
 import * as Styled from './styled';
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
     <Styled.Wrapper>
       <Header />
       <Sidebar />
+      <SlotMachineGame />
     </Styled.Wrapper>
   );
 };
