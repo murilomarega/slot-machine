@@ -101,4 +101,17 @@ const FruitImg = styled.img<{ rotateX: number }>`
   `}
 `;
 
-export { FruitImg, Glass, Separator, SeparatorsWrapper, Slots, SlotsWrapper, Wrapper };
+const HistoryWrapper = styled.div`
+  height: 300px;
+`;
+
+export {
+  FruitImg,
+  Glass,
+  Separator,
+  SeparatorsWrapper,
+  Slots,
+  SlotsWrapper,
+  Wrapper,
+  HistoryWrapper,
+};
