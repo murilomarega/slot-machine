@@ -33,4 +33,6 @@ const fruitWinsMap: IWinsKeyValues = {
   },
 };
 
-export { fruitImages, fruitWinsMap, playCost };
+const reelsAnimationTimes = [4000, 5500, 7000];
+
+export { fruitImages, fruitWinsMap, playCost, reelsAnimationTimes };
