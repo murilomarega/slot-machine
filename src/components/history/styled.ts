@@ -1,5 +1,5 @@
-import { css, styled } from 'styled-components';
 import { BsCoin } from 'react-icons/bs';
+import { css, styled } from 'styled-components';
 
 const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -15,14 +15,14 @@ const Wrapper = styled.div`
   `}
 `;
 
-const HistoryItem = styled.div<{ isWin: boolean }>`
-  ${({ isWin, theme }) => css`
+const HistoryItem = styled.div<{ $isWin: boolean }>`
+  ${({ $isWin, theme }) => css`
     display: flex;
     gap: 4px;
     align-items: center;
     width: min-content;
     padding: 0 ${theme.spacing.s2};
-    border: 1px solid ${isWin ? theme.color.white : 'transparent'};
+    border: 1px solid ${$isWin ? theme.color.white : 'transparent'};
   `}
 `;
 
@@ -61,4 +61,4 @@ const IconCoin = styled(BsCoin)`
   `}
 `;
 
-export { Wrapper, HistoryItem, FruitImage, IconCoin, CoinsWrapper, Coins };
+export { Coins, CoinsWrapper, FruitImage, HistoryItem, IconCoin, Wrapper };
