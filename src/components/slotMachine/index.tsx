@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import * as Styled from './styled';
 
 import { v4 as uuidv4 } from 'uuid';
-import { fruitImages, fruitWinsMap } from '../../constants';
+import { fruitImages, fruitWinsMap, playCost, reelsAnimationTimes } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
 import { IPlay } from '../../store/interfaces';
 import {
@@ -25,6 +25,8 @@ const SlotMachineGame = () => {
 
   const [reelsAngles, setReelsAngles] = useState<number[]>([]);
   const [sortedItems, setSortedItems] = useState<number[]>([]);
+
+  const [isPlayOngoing, setIsPlayOngoing] = useState(false);
 
   const getRandomNumber = (max: number) => Math.floor(Math.random() * max);
   const getRotateX = (itemIndex: number, angle: number) => itemIndex * angle;
@@ -100,7 +102,12 @@ const SlotMachineGame = () => {
     });
 
     setSortedItems(newSortedItems);
-    checkIfPlayIsWin(newSortedItems);
+
+    setIsPlayOngoing(true);
+    setTimeout(() => {
+      checkIfPlayIsWin(newSortedItems);
+      setIsPlayOngoing(false);
+    }, reelsAnimationTimes[reelsAnimationTimes.length - 1]);
   };
 
   useEffect(() => {
@@ -126,7 +133,7 @@ const SlotMachineGame = () => {
             reels?.map((reel, reelIndex) => (
               <Styled.Slots
                 itemSorted={itemSortedPositionX(reelIndex)}
-                reelAnimationTime={reelIndex + 4}
+                reelAnimationTime={reelsAnimationTimes[reelIndex]}
               >
                 {reel.reels.map((item: string, fruitIndex) => (
                   <Styled.FruitImg
@@ -140,10 +147,25 @@ const SlotMachineGame = () => {
             ))}
         </Styled.SlotsWrapper>
       </Styled.Wrapper>
-      <button onClick={() => sortItems()}>sort</button>
-      <br />
-      <span style={{ color: 'white' }}>coins: {credits}</span>
-      <br />
+      <Styled.BalanceWrapper>
+        <Styled.Ammount>
+          Balance <Styled.Quantity>x</Styled.Quantity>
+          {credits}
+          <Styled.IconCoin />
+        </Styled.Ammount>
+
+        <Styled.Ammount>
+          Spin cost <Styled.Quantity>x</Styled.Quantity>
+          {playCost}
+          <Styled.IconCoin />
+        </Styled.Ammount>
+      </Styled.BalanceWrapper>
+
+      <Styled.SortButtonWrapper>
+        <Styled.SortButton onClick={() => sortItems()} disabled={isPlayOngoing || credits <= 0}>
+          <span>SPIN</span>
+        </Styled.SortButton>
+      </Styled.SortButtonWrapper>
 
       <Styled.HistoryWrapper>
         <PlaysHistory />

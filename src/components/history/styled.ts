@@ -1,5 +1,4 @@
 import { css, styled } from 'styled-components';
-
 import { BsCoin } from 'react-icons/bs';
 
 const Wrapper = styled.div`
