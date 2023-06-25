@@ -19,13 +19,18 @@ interface IReel {
 }
 
 interface IPlay {
-  play: string[];
+  sortedFruits: string[];
+  isWin: boolean;
+  creditsEarned: number;
 }
 
-interface IPlayHistory {
-  playHistory: IPlay[];
+interface IWins {
+  winWithTwoFruits: number;
+  winWithThreeFruits: number;
 }
 
-export type { IReel, IPlayHistory };
+interface IWinsKeyValues {
+  [key: string]: IWins;
+}
 
-export type { TRequestStatus };
+export type { IPlay, IReel, TRequestStatus, IWinsKeyValues };

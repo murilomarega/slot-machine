@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '..';
 import apiService from '../../services/config';
-import { IPlayHistory, IReel, TRequestStatus } from '../interfaces';
+import { IPlay, IReel, TRequestStatus } from '../interfaces';
 
 // Define a type for the slice state
 interface ISlotMachineState {
   status: TRequestStatus;
   error: string | undefined;
   reels: IReel[];
-  history: IPlayHistory[];
+  history: IPlay[];
   credits: number;
 }
 
@@ -18,7 +18,7 @@ const initialState = {
   error: undefined,
   reels: [],
   history: [],
-  credits: 50,
+  credits: 20,
 } as ISlotMachineState;
 
 export const fetchReels = createAsyncThunk('fetch-reels', async () => {
@@ -33,7 +33,7 @@ export const slotMachine = createSlice({
     setReels: (state, action: PayloadAction<IReel[]>) => {
       state.reels = action.payload;
     },
-    incrementHistory: (state, action: PayloadAction<IPlayHistory>) => {
+    incrementHistory: (state, action: PayloadAction<IPlay>) => {
       state.history.unshift(action.payload);
     },
     decrementsCredits: (state) => {
@@ -64,8 +64,9 @@ export const { setReels, incrementHistory, decrementsCredits, incrementCredits }
 
 // Other code such as selectors can use the imported `RootState` type
 export const getReels = (state: RootState) => state.slotMachine.reels;
+export const getSlotMachineStatus = (state: RootState) => state.slotMachine.status;
 export const getSlotMachineError = (state: RootState) => state.slotMachine.error;
-export const getHistory = (state: RootState) => state.slotMachine.history;
+export const getHistoryOfPlays = (state: RootState) => state.slotMachine.history;
 export const getCredits = (state: RootState) => state.slotMachine.credits;
 
 export default slotMachine.reducer;

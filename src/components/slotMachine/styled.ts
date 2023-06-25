@@ -83,7 +83,7 @@ const Slots = styled.ul<{ itemSorted: number; reelAnimationTime: number }>`
     list-style: none;
     height: 125px;
     width: 100%;
-    transform: rotateX(${itemSorted}deg);
+    transform: rotateX(-${itemSorted}deg);
     transition: all ${reelAnimationTime}s;
     transform-style: preserve-3d;
     float: left;
