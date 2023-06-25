@@ -7,6 +7,7 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
     padding: ${theme.spacing.s5} ${theme.spacing.s4};
     grid-gap: ${theme.spacing.s2};
+    color: white;
   `}
 `;
 
@@ -64,6 +65,7 @@ const ItemWrapper = styled.div`
     height: 200px;
     border-radius: 4px;
     position: relative;
+    cursor: default;
 
     transition: transform 0.2s;
 

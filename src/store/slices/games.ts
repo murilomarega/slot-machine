@@ -8,6 +8,7 @@ interface IGamesState {
   status: TRequestStatus;
   error: string | undefined;
   data: IGame[];
+  filteredData: IGame[];
   searchedTerm: string;
 }
 
@@ -16,6 +17,7 @@ const initialState = {
   status: 'idle',
   error: undefined,
   data: [],
+  filteredData: [],
   searchedTerm: '',
 } as IGamesState;
 
@@ -32,7 +34,13 @@ export const gamesSlice = createSlice({
       state.data = action.payload;
     },
     setSearchedTerm: (state, action: PayloadAction<string>) => {
+      const filteredData = state.data.filter(
+        (game) =>
+          game.title.toLowerCase().includes(action.payload) ||
+          game.providerName.toLowerCase().includes(action.payload),
+      );
       state.searchedTerm = action.payload;
+      state.filteredData = filteredData;
     },
   },
   extraReducers(builder) {
@@ -56,6 +64,7 @@ export const { setGames, setSearchedTerm } = gamesSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const getGames = (state: RootState) => state.games.data;
+export const getFilteredGames = (state: RootState) => state.games.filteredData;
 export const getGamesError = (state: RootState) => state.games.error;
 export const getSearchedTerm = (state: RootState) => state.games.searchedTerm;
 
