@@ -2,13 +2,28 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import gamesReducer from './slices/games';
 import slotMachineReducer from './slices/slotMachine';
-// ...
+
+const getInitialStateFromSession = () => {
+  const storedState = sessionStorage.getItem('wheel-of-fortune');
+  return storedState ? JSON.parse(storedState) : undefined;
+};
+
+const localstorageMiddleware = (store) => (next) => (action) => {
+  const result = next(action);
+
+  const state = store.getState();
+  sessionStorage.setItem('wheel-of-fortune', JSON.stringify(state));
+
+  return result;
+};
 
 const store = configureStore({
   reducer: {
     games: gamesReducer,
     slotMachine: slotMachineReducer,
   },
+  preloadedState: getInitialStateFromSession(),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(localstorageMiddleware),
 });
 
 export default store;
