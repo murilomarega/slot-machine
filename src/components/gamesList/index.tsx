@@ -1,26 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
-import { IGame } from '../../store/interfaces';
-import { fetchGamesList, getGames, getSearchedTerm } from '../../store/slices/games';
+import { fetchGamesList, getGames } from '../../store/slices/games';
 import * as Styled from './styled';
 
 const GamesList = () => {
   const dispatch = useAppDispatch();
   const games = useAppSelector(getGames);
-  const searchedTerm = useAppSelector(getSearchedTerm);
   const gameStatus = useAppSelector((state) => state.games.status);
-
-  const [filteredList, setFilteredList] = useState<IGame[]>([]);
-
-  useEffect(() => {
-    if (searchedTerm !== '') {
-      const filtered = games.filter((game) => game.title.includes(searchedTerm));
-
-      setFilteredList(filtered);
-      return;
-    }
-    setFilteredList([]);
-  }, [searchedTerm, games]);
 
   useEffect(() => {
     if (gameStatus === 'idle') {
@@ -29,15 +15,21 @@ const GamesList = () => {
   }, [gameStatus, dispatch]);
 
   return (
-    <>
-      {searchedTerm && (
-        <Styled.List>
-          {filteredList.map((game) => (
-            <Styled.ListItem key={game.id}>{game.title}</Styled.ListItem>
-          ))}
-        </Styled.List>
-      )}
-    </>
+    <Styled.Wrapper>
+      {games.map((game) => (
+        <Styled.ItemWrapper key={game.id}>
+          <Styled.ItemBackground backgroundImg={game?.thumb?.url}>
+            <Styled.ItemBackdrop />
+            <Styled.InternalWrapper>
+              <Styled.ItemTitle>{game.title}</Styled.ItemTitle>
+
+              <Styled.ItemSubTitle>Provider</Styled.ItemSubTitle>
+              <Styled.ItemTitle>{game.providerName}</Styled.ItemTitle>
+            </Styled.InternalWrapper>
+          </Styled.ItemBackground>
+        </Styled.ItemWrapper>
+      ))}
+    </Styled.Wrapper>
   );
 };
 
