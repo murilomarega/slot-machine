@@ -43,7 +43,7 @@ export const gamesSlice = createSlice({
       .addCase(fetchGamesList.fulfilled, (state, action) => {
         state.status = 'succeeded';
         // Add any fetched posts to the array
-        state.data = state.data.concat(action.payload);
+        state.data = action.payload;
       })
       .addCase(fetchGamesList.rejected, (state, action) => {
         state.status = 'failed';

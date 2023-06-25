@@ -9,9 +9,7 @@ export interface IGame {
   slug: string;
   title: string;
   providerName: string;
-  thumb: {
-    url: IThumb;
-  };
+  thumb: IThumb;
 }
 
 interface IReel {
