@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react';
 import * as Styled from './styled';
 
+import { v4 as uuidv4 } from 'uuid';
+import { fruitImages, fruitWinsMap } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../hooks/useStore';
 import { IPlay } from '../../store/interfaces';
 import {
   decrementsCredits,
   fetchReels,
   getCredits,
-  getHistoryOfPlays,
   getReels,
   getSlotMachineStatus,
   incrementCredits,
   incrementHistory,
 } from '../../store/slices/slotMachine';
-import { fruitImages, fruitWinsMap } from '../constants';
+import PlaysHistory from '../history';
 
 const SlotMachineGame = () => {
   const dispatch = useAppDispatch();
 
   const reels = useAppSelector(getReels);
   const slotMachineStatus = useAppSelector(getSlotMachineStatus);
-  const playsHistory = useAppSelector(getHistoryOfPlays);
   const credits = useAppSelector(getCredits);
 
   const [reelsAngles, setReelsAngles] = useState<number[]>([]);
@@ -34,6 +34,7 @@ const SlotMachineGame = () => {
 
   const savePlayOnHistory = (sortedFruits: string[], creditsEarned = 0, isWin = false) => {
     const play: IPlay = {
+      uuid: uuidv4(),
       creditsEarned,
       isWin,
       sortedFruits,
@@ -143,32 +144,12 @@ const SlotMachineGame = () => {
       <br />
       <span style={{ color: 'white' }}>coins: {credits}</span>
       <br />
-      <div>
-        {!!playsHistory.length &&
-          playsHistory.map((play) => (
-            <div style={{ color: 'white' }}>
-              is win: {String(play.isWin)} / credits earned: {play.creditsEarned} /
-              {play.sortedFruits.map((fruit) => (
-                <span> {fruit} </span>
-              ))}
-            </div>
-          ))}
-      </div>
+
+      <Styled.HistoryWrapper>
+        <PlaysHistory />
+      </Styled.HistoryWrapper>
     </>
   );
 };
 
 export default SlotMachineGame;
-
-{
-  /* <Styled.Slots>
-{reels?.reel2.map((reel, index) => (
-  <Styled.FruitImg src={fruitImages[reel]} alt={reel} key={reel} rotateX={index * 45} />
-))}
-</Styled.Slots>
-<Styled.Slots>
-{reels?.reel3.map((reel, index) => (
-  <Styled.FruitImg src={fruitImages[reel]} alt={reel} key={reel} rotateX={index * 45} />
-))}
-</Styled.Slots> */
-}

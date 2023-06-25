@@ -1,10 +1,9 @@
-import { IFruitImages } from '../../interfaces/general.interface';
-
-import appleImg from '../../assets/fruits/apple.png';
-import bananaImg from '../../assets/fruits/banana.png';
-import cherryImg from '../../assets/fruits/cherry.png';
-import lemonImg from '../../assets/fruits/lemon.png';
-import { IWinsKeyValues } from '../../store/interfaces';
+import appleImg from '../assets/fruits/apple.png';
+import bananaImg from '../assets/fruits/banana.png';
+import cherryImg from '../assets/fruits/cherry.png';
+import lemonImg from '../assets/fruits/lemon.png';
+import { IFruitImages } from '../interfaces/general.interface';
+import { IWinsKeyValues } from '../store/interfaces';
 
 const playCost = 1;
 

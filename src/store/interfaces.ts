@@ -17,6 +17,7 @@ interface IReel {
 }
 
 interface IPlay {
+  uuid: string;
   sortedFruits: string[];
   isWin: boolean;
   creditsEarned: number;
