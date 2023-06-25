@@ -1,5 +1,19 @@
 import { BsCoin } from 'react-icons/bs';
-import { css, styled } from 'styled-components';
+import { css, keyframes, styled } from 'styled-components';
+
+const reelAnimation = (initialDeg: number, finalDeg: number) => keyframes`
+  0% {
+    transform: rotateX(-${initialDeg}deg);
+  }
+
+  5% {
+    transform: rotateX(3000deg);
+  }
+
+  100% {
+    transform: rotateX(-${finalDeg}deg);
+  }
+`;
 
 const Wrapper = styled.div`
   ${({ theme }) => css`
@@ -24,31 +38,7 @@ const Glass = styled.div`
   left: 0;
   z-index: 20;
 
-  background: linear-gradient(#3535e821, #ffffff21, #3535e821);
-
-  // background: linear-gradient(
-  //   to bottom,
-  //   #3535e870 0%,
-  //   rgba(53, 53, 232, 0) 15%,
-  //   rgba(53, 53, 232, 0) 85%,
-  //   #3535e870 100%
-  // );
-
-  // background: linear-gradient(
-  //   to bottom,
-  //   #00000070 0%,
-  //   rgba(53, 53, 232, 0) 15%,
-  //   rgba(53, 53, 232, 0) 85%,
-  //   #00000070 100%
-  // );
-
-  // background: linear-gradient(
-  //   to bottom,
-  //   #00000070 0%,
-  //   #ffffff02 20%,
-  //   #ffffff02 80%,
-  //   #00000070 100%
-  // );
+  background: linear-gradient(#3535e830, #ffffff21, #3535e840);
 `;
 
 const SeparatorsWrapper = styled.div`
@@ -79,23 +69,33 @@ const SlotsWrapper = styled.div`
   scale: 0.85;
 `;
 
-const Slots = styled.ul<{ itemSorted: number; reelAnimationTime: number }>`
-  ${({ itemSorted, reelAnimationTime }) => css`
+const Slots = styled.ul<{
+  $currentSortedItem: number;
+  $newSortedItem: number;
+  $reelAnimationTime: number;
+  $isPlayOngoing: boolean;
+}>`
+  ${({ $newSortedItem }) => css`
     list-style: none;
     height: 125px;
     width: 100%;
-    transform: rotateX(-${itemSorted}deg);
-    transition: all ${reelAnimationTime}ms;
+    transform: rotateX(-${$newSortedItem}deg);
     transform-style: preserve-3d;
-    float: left;
   `}
+
+  ${({ $currentSortedItem, $newSortedItem, $reelAnimationTime, $isPlayOngoing }) =>
+    $isPlayOngoing &&
+    css`
+      animation: ${reelAnimation($currentSortedItem, $newSortedItem)} ${$reelAnimationTime}ms
+        cubic-bezier(0.01, 0.56, 0.36, 1);
+    `}
 `;
 
-const FruitImg = styled.img<{ rotateX: number }>`
-  ${({ rotateX }) => css`
+const FruitImg = styled.img<{ $rotateX: number }>`
+  ${({ $rotateX }) => css`
     height: 100%;
     width: 100%;
-    transform: rotateX(${rotateX}deg) translateZ(150px);
+    transform: rotateX(${$rotateX}deg) translateZ(150px);
     backface-visibility: hidden;
     object-fit: contain;
     position: absolute;

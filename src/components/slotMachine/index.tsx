@@ -24,15 +24,16 @@ const SlotMachineGame = () => {
   const credits = useAppSelector(getCredits);
 
   const [reelsAngles, setReelsAngles] = useState<number[]>([]);
-  const [sortedItems, setSortedItems] = useState<number[]>([]);
+  const [oldSortedItems, setOldSortedItems] = useState<number[]>([0, 0, 0]);
+  const [newSortedItems, setNewSortedItems] = useState<number[]>([0, 0, 0]);
 
   const [isPlayOngoing, setIsPlayOngoing] = useState(false);
 
   const getRandomNumber = (max: number) => Math.floor(Math.random() * max);
   const getRotateX = (itemIndex: number, angle: number) => itemIndex * angle;
 
-  const itemSortedPositionX = (itemIndex: number) =>
-    sortedItems[itemIndex] * reelsAngles[itemIndex];
+  const itemSortedPositionX = (arr: number[], itemIndex: number) =>
+    arr[itemIndex] * reelsAngles[itemIndex];
 
   const savePlayOnHistory = (sortedFruits: string[], creditsEarned = 0, isWin = false) => {
     const play: IPlay = {
@@ -94,18 +95,19 @@ const SlotMachineGame = () => {
 
   const sortItems = () => {
     dispatch(decrementsCredits());
-    const newSortedItems: number[] = [];
+    const newItems: number[] = [];
 
     reels?.forEach((item) => {
       const sortedFruit = getRandomNumber(item.reels.length);
-      newSortedItems.push(sortedFruit);
+      newItems.push(sortedFruit);
     });
 
-    setSortedItems(newSortedItems);
+    setOldSortedItems(newSortedItems);
+    setNewSortedItems(newItems);
 
     setIsPlayOngoing(true);
     setTimeout(() => {
-      checkIfPlayIsWin(newSortedItems);
+      checkIfPlayIsWin(newItems);
       setIsPlayOngoing(false);
     }, reelsAnimationTimes[reelsAnimationTimes.length - 1]);
   };
@@ -132,15 +134,18 @@ const SlotMachineGame = () => {
           {!!reels?.length &&
             reels?.map((reel, reelIndex) => (
               <Styled.Slots
-                itemSorted={itemSortedPositionX(reelIndex)}
-                reelAnimationTime={reelsAnimationTimes[reelIndex]}
+                $currentSortedItem={itemSortedPositionX(oldSortedItems, reelIndex)}
+                $newSortedItem={itemSortedPositionX(newSortedItems, reelIndex)}
+                $reelAnimationTime={reelsAnimationTimes[reelIndex]}
+                $isPlayOngoing={isPlayOngoing}
+                key={uuidv4()}
               >
                 {reel.reels.map((item: string, fruitIndex) => (
                   <Styled.FruitImg
                     src={fruitImages[item]}
                     alt={item}
-                    key={item}
-                    rotateX={getRotateX(fruitIndex, reelsAngles[reelIndex])}
+                    key={uuidv4()}
+                    $rotateX={getRotateX(fruitIndex, reelsAngles[reelIndex])}
                   />
                 ))}
               </Styled.Slots>
