@@ -1,6 +1,6 @@
 import { FaGamepad } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { css, styled } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
   width: 100%;

@@ -1,5 +1,5 @@
 import { BiSearchAlt2 } from 'react-icons/bi';
-import { css, styled } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const SearchIcon = styled(BiSearchAlt2)`
   ${({ theme }) => css`
