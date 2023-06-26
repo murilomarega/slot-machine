@@ -1,5 +1,5 @@
 import { BsCoin } from 'react-icons/bs';
-import { css, keyframes, styled } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 const reelAnimation = (initialDeg: number, finalDeg: number) => keyframes`
   0% {

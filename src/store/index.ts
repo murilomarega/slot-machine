@@ -8,7 +8,8 @@ const getInitialStateFromSession = () => {
   return storedState ? JSON.parse(storedState) : undefined;
 };
 
-const localstorageMiddleware = (store) => (next) => (action) => {
+// eslint-disable-next-line
+const localstorageMiddleware = (store: any) => (next: any) => (action: any) => {
   const result = next(action);
 
   const state = store.getState();
