@@ -22,7 +22,7 @@ const initialState = {
 } as ISlotMachineState;
 
 export const fetchReels = createAsyncThunk('fetch-reels', async () => {
-  const response = await apiService.get<IReel[]>('/api/reels');
+  const response = await apiService.get<IReel[]>('/reels');
   return response.data;
 });
 

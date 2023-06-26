@@ -22,7 +22,7 @@ const initialState = {
 } as IGamesState;
 
 export const fetchGamesList = createAsyncThunk('fetch-games-list', async () => {
-  const response = await apiService.get<IGame[]>('/api/games');
+  const response = await apiService.get<IGame[]>('/games');
   return response.data;
 });
 
