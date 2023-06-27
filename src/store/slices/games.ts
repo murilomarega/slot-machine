@@ -36,8 +36,8 @@ export const gamesSlice = createSlice({
     setSearchedTerm: (state, action: PayloadAction<string>) => {
       const filteredData = state.data.filter(
         (game) =>
-          game.title.toLowerCase().includes(action.payload) ||
-          game.providerName.toLowerCase().includes(action.payload),
+          game.title.toLowerCase().includes(action.payload.toLowerCase()) ||
+          game.providerName.toLowerCase().includes(action.payload.toLowerCase()),
       );
       state.searchedTerm = action.payload;
       state.filteredData = filteredData;

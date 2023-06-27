@@ -11,11 +11,11 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/api/games', (req, res) => {
+app.get('/games', (req, res) => {
   res.send({ data: gamesList });
 });
 
-app.get('/api/reels', (req, res) => {
+app.get('/reels', (req, res) => {
   res.send({ data: reelsData });
 });
 
