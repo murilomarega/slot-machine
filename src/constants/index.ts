@@ -15,7 +15,7 @@ const fruitImages: IFruitImages = {
 };
 
 const fruitWinsMap: IWinsKeyValues = {
-  ['cherries']: {
+  ['cherry']: {
     winWithTwoFruits: 40,
     winWithThreeFruits: 50,
   },
